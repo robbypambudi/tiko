@@ -44,7 +44,7 @@ export default function LoginPage() {
         >
           <div className='layout'>
             <div className='white-05 max-w-md p-5 rounded-xl'>
-              <p className='text-primary text-2xl font-bold'>Ayo Daftar!</p>
+              <p className='text-primary text-2xl font-bold'>Ayo Login!</p>
               <FormProvider {...metods}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Input

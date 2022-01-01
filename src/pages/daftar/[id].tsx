@@ -34,7 +34,7 @@ export default function Daftar() {
     };
     toast.promise(api.post('/pesan-tiket', data), {
       loading: 'Loading',
-      success: 'Berhasil Login',
+      success: 'Berhasil Mendaftar',
       error: (err) => err.response.data.message,
     });
   };
