@@ -5,7 +5,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ['Inter', ...fontFamily.sans],
+        primary: ['Titania', ...fontFamily.sans],
+        secondary: ['Montserrat', ...fontFamily.sans],
+        tertiary: ['Inter', ...fontFamily.sans],
       },
     },
     plugins: [require('@tailwindcss/forms')],
