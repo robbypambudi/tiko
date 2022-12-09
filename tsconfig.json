@@ -1,38 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@layout/*": [
-        "src/layout/*"
-      ],
-      "@lib/*": [
-        "src/lib/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@styles/*": [
-        "src/styles/*"
-      ],
-      "#images": [
-        "public/images/*"
-      ],
-      "#": [
-        "public/*"
-      ]
-    },
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -44,14 +13,21 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@layout/*": ["src/layout/*"],
+      "@lib/*": ["src/lib/*"],
+      "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"],
+      "@styles/*": ["src/styles/*"],
+      "@typ/*": ["src/types/*"],
+      "#images": ["public/images/*"],
+      "#": ["public/*"]
+    },
     "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
+  "moduleResolution": ["node_modules", ".next", "node"]
 }

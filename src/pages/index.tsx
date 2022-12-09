@@ -45,9 +45,12 @@ export default function Home() {
     <>
       <SEO title='Home' />
 
-      <section id='hero' className='bg-[url(/images/hero.png)]'>
-        <main className='h-screen flex items-center layout'>
-          <div className='space-y-2'>
+      <main className='min-h-screen'>
+        <section
+          id='hero'
+          className='bg-[url(/images/hero.png)] flex items-center h-screen'
+        >
+          <div className='space-y-2 layout'>
             <h1 className='text-8xl text-white'>Tiko</h1>
             <p className='text-white text-4xl font-medium'>
               Watch the most magnificant concert you&apos;ve never seen
@@ -63,8 +66,18 @@ export default function Home() {
               ></form>
             </FormProvider>
           </div>
-        </main>
-      </section>
+        </section>
+        <section id='populer' className='h-screen'>
+          <div className='layout'>
+            <div className='mt-20'>
+              <h2 className='font-secondary font-bold text-5xl'>
+                Populer saat ini
+              </h2>
+              <p className='mt-6'>Ayo cari dan tonton artis favoritmu!!</p>
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 }
