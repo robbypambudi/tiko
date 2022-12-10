@@ -9,7 +9,7 @@ type Data = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  connection.query('SELECT * FROM role', function (err, results, fields) {
+  connection.query('SELECT * FROM role', function (err, results) {
     if (err) {
       res.status(500).json({ error: err });
     }
