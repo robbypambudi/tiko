@@ -24,6 +24,16 @@
   .white-05 {
     background: rgba(255, 255, 255, 0.5);
   }
+  .white-04 {
+    background: rgba(216, 216, 216, 0.4);
+  }
+  .footer-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(123, 44, 191, 0) 0%,
+      #3c096c 77.08%
+    );
+  }
 }
 
 /* #region  /**=========== Datepicker =========== */
