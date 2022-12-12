@@ -16,9 +16,19 @@ export default async function register(
       email: Joi.string().email().required(),
       password: Joi.string().min(6).required(),
       no_telp: Joi.string().required(),
+      konfirmasi_password: Joi.string().min(6).required(),
     });
 
     const { error } = schema.validate(req.body);
+
+    if (req.body.password !== req.body.konfirmasi_password) {
+      const respond = {
+        status: 400,
+        message: 'Password tidak sama',
+      };
+      res.status(400).json(respond);
+      return;
+    }
 
     if (error) {
       const respond = {

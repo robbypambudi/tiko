@@ -1,10 +1,23 @@
+/* eslint-disable unused-imports/no-unused-vars */
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import Layout from '@layout/Layout';
+import { useQuery } from '@tanstack/react-query';
+import { ApiReturn } from '@typ/api';
 
 import SEO from '@components/Seo';
 
+import { mockQuery } from '@lib/apiMock';
+
 type SearchForm = {
   search: string;
+};
+
+type ArtisData = {
+  id: number;
+  nama: string;
+  date: string;
+  image: string;
 };
 
 const events = [
@@ -37,12 +50,18 @@ export default function Home() {
     return events;
   }, [search]);
 
-  const onSubmit = (data: SearchForm) => {
-    console.log(data);
-  };
+  const onSubmit = (data: SearchForm) => {};
+  const url = 'http://localhost:3000/api/artis';
+  const { data: queryData } = useQuery<ApiReturn<ArtisData[]>, Error>(
+    [url],
+    mockQuery,
+    {
+      keepPreviousData: true,
+    }
+  );
 
   return (
-    <>
+    <Layout>
       <SEO title='Home' />
 
       <main className='min-h-screen'>
@@ -69,7 +88,7 @@ export default function Home() {
         </section>
         <section id='populer' className='h-screen'>
           <div className='layout'>
-            <div className='mt-20'>
+            <div className='pt-20'>
               <h2 className='font-secondary font-bold text-5xl'>
                 Populer saat ini
               </h2>
@@ -78,6 +97,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-    </>
+    </Layout>
   );
 }

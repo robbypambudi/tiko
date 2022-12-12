@@ -1,10 +1,8 @@
 import bcrypt from 'bcrypt';
 import Joi from 'joi';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { v4 as uuidv4 } from 'uuid';
 
 import connection from '@lib/db';
-import formatedTimestamp from '@lib/formatdate';
 
 type Data = {
   email: string;
@@ -39,7 +37,7 @@ export default async function handler(
       return;
     }
 
-    const isFind = connection.query(
+    connection.query(
       `SELECT email FROM user WHERE email = '${req.body.email}'`,
       function (err, results) {
         if (err) {
@@ -50,58 +48,47 @@ export default async function handler(
         const data = results as Data[];
 
         if (data.length > 0) {
-          return true;
+          const sql = `SELECT password,id FROM user WHERE email = '${req.body.email}'`;
+
+          connection.query(sql, function (err: any, results: Password) {
+            if (err) {
+              res.status(500).json({ error: 'Internal server error' });
+              return;
+            }
+            bcrypt.compare(
+              req.body.password,
+              results[0].password,
+              function (err, result) {
+                if (err) {
+                  res
+                    .status(500)
+                    .json({ error: 'Internal server error', status: false });
+                  return;
+                }
+                if (result) {
+                  res.status(200).json({
+                    status: true,
+                    id: results[0].id,
+                  });
+                }
+                if (!result) {
+                  res.status(400).json({
+                    status: false,
+                    message: 'Password is wrong',
+                  });
+                }
+              }
+            );
+          });
         } else {
-          return false;
+          const respond = {
+            status: 400,
+            message: 'Email not found',
+          };
+          res.status(400).json(respond);
+          return;
         }
       }
     );
-    if (!isFind) {
-      const respond = {
-        status: 400,
-        message: 'Email not found',
-      };
-      res.status(400).json(respond);
-      return;
-    }
-
-    const sql = `SELECT password,id FROM user WHERE email = '${req.body.email}'`;
-    const data = connection.query(sql, function (err: any, results: Password) {
-      if (err) {
-        res.status(500).json({ error: 'Internal server error' });
-        return;
-      }
-      let hash;
-      bcrypt.compare(
-        req.body.password,
-        results[0].password,
-        function (err, result) {
-          if (err) {
-            res
-              .status(500)
-              .json({ error: 'Internal server error', status: false });
-            return;
-          }
-          hash = result;
-        }
-      );
-      return hash;
-    });
-    res.status(200).json({ message: 'Berhasil login', status: data });
-
-    if (status[0]) {
-      const token = uuidv4();
-      const sql = `INSERT INTO session ( user_id, token, expirate) VALUES ('${
-        status[1]
-      }', '${token}', '${formatedTimestamp(3)}')`;
-      connection.query(sql, function (err) {
-        if (err) {
-          res.status(500).json({ error: 'Internal server error' });
-          return;
-        }
-        res.status(200).json({ message: 'Berhasil login', status: true });
-      });
-    }
-    res.status(400).json({ message: 'Password salah' });
   }
 }

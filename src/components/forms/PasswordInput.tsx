@@ -64,7 +64,8 @@ export default function PasswordInput({
               : errors[id]
               ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:border-primary-500 focus:ring-primary-500',
-            'block w-full rounded-md shadow-sm'
+            'block w-full rounded-md shadow-sm px-4 py-2',
+            'white-05 border border-white'
           )}
           placeholder={placeholder}
           aria-describedby={id}

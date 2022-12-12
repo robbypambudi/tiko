@@ -46,7 +46,10 @@ export default function Input({
 
   return (
     <div>
-      <label htmlFor={id} className='block text-sm font-normal text-gray-700'>
+      <label
+        htmlFor={id}
+        className='block text-sm font-normal text-gray-700 mt-3'
+      >
         {label}
       </label>
       <div className='relative mt-1'>
@@ -63,7 +66,8 @@ export default function Input({
               : errors[id]
               ? 'focus:ring-red-500 border-red-500 focus:border-red-500'
               : 'focus:ring-primary-500 border-gray-300 focus:border-primary-500',
-            'block w-full rounded-md shadow-sm'
+            'block w-full rounded-md shadow-sm px-4 py-2',
+            'border border-white white-05'
           )}
           placeholder={placeholder}
           aria-describedby={id}

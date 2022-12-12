@@ -21,6 +21,9 @@
     max-width: 63.75rem;
     @apply mx-auto w-11/12;
   }
+  .white-05 {
+    background: rgba(255, 255, 255, 0.5);
+  }
 }
 
 /* #region  /**=========== Datepicker =========== */
