@@ -9,6 +9,7 @@ import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 // core version + navigation, pagination modules:
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import UnstyledLink from '@components/links/UnstyledLink';
 import SEO from '@components/Seo';
 
 import { mockQuery } from '@lib/apiMock';
@@ -154,7 +155,10 @@ export default function Home() {
                 >
                   {queryData?.data.map((artis) => (
                     <SwiperSlide key={artis.id}>
-                      <div className='flex flex-col items-center relative border shadow-md rounded-xl px-2 py-1 bg-slate-200'>
+                      <UnstyledLink
+                        className='flex flex-col items-center relative border shadow-md rounded-xl px-2 py-1 bg-slate-200'
+                        href={'/event/' + artis.id}
+                      >
                         <Image
                           src={'/images' + artis.path_image}
                           alt={artis.nama}
@@ -166,10 +170,11 @@ export default function Home() {
                           <div>
                             <h1 className='text-2xl'>{artis.nama}</h1>
                             <p>{artis.tanggal.slice(0, 10)}</p>
+                            <p className='font-bold'>{artis.nama_event}</p>
                           </div>
                           <p>{artis.waktu_tampil}</p>
                         </div>
-                      </div>
+                      </UnstyledLink>
                     </SwiperSlide>
                   ))}
                 </Swiper>
@@ -199,7 +204,10 @@ export default function Home() {
                 >
                   {eventData?.data.map((event) => (
                     <SwiperSlide key={event.id}>
-                      <div className='flex flex-col items-center relative border shadow-md rounded-xl px-2 py-1 bg-slate-200'>
+                      <UnstyledLink
+                        className='flex flex-col items-center relative border shadow-md rounded-xl px-2 py-1 bg-slate-200'
+                        href={`/event/` + event.id}
+                      >
                         <p className='absolute z-10 left-0 top-5 font-bold bg-violet-600 rounded px-4 rounded-r-full text-white'>
                           Rp.{event.harga}
                         </p>
@@ -224,7 +232,7 @@ export default function Home() {
                             <p>{event.waktu_tampil}</p>
                           </div>
                         </div>
-                      </div>
+                      </UnstyledLink>
                     </SwiperSlide>
                   ))}
                 </Swiper>

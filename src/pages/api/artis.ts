@@ -5,7 +5,7 @@ import connection from '@lib/db';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   // MENAMPILAN ARTIS TERPOPULEN DAN ACARA YANG TERDEKE
-  const sql = `SELECT nama_event, event.tanggal,artis.nama, guest_star.waktu_tampil, 
+  const sql = `SELECT nama_event, event.tanggal,artis.nama, event.id, guest_star.waktu_tampil, 
   artis.pengemar, artis.path_image FROM artis JOIN guest_star on 
   guest_star.artis_id = artis.id JOIN event ON event.id = guest_star.event_id
   ORDER BY pengemar DESC LIMIT 5;`;

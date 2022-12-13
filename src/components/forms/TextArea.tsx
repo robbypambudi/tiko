@@ -18,6 +18,7 @@ export default function TextArea({
   placeholder = '',
   helperText,
   id,
+  className,
   readOnly = false,
   hideError = false,
   validation,
@@ -47,7 +48,8 @@ export default function TextArea({
               : errors[id]
               ? 'focus:ring-red-500 border-red-500 focus:border-red-500'
               : 'focus:ring-primary-500 border-gray-300 focus:border-primary-500',
-            'block w-full rounded-md shadow-sm'
+            'block w-full rounded-md shadow-sm',
+            className
           )}
           placeholder={placeholder}
           aria-describedby={id}

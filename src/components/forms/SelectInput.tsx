@@ -21,6 +21,7 @@ export default function SelectInput({
   placeholder,
   readOnly = false,
   children,
+  className,
   validation,
   ...rest
 }: SelectInputProps) {
@@ -66,7 +67,8 @@ export default function SelectInput({
               : errors[id]
               ? 'border-red-500 focus:border-red-500 focus:ring-red-500'
               : 'border-gray-300 focus:border-primary-500 focus:ring-primary-500',
-            'block w-full rounded-md shadow-sm',
+            'block w-full rounded-md shadow-sm px-4 py-2',
+            className,
             { 'text-gray-500': value === '' }
           )}
           aria-describedby={id}
